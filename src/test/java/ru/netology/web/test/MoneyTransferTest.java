@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.LoginPage;
@@ -28,14 +27,14 @@ public class MoneyTransferTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        var InitialBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var InitialBalanceSecondCard = dashboardPage.getCardBalance(1);
+        var initialBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var initialBalanceSecondCard = dashboardPage.getCardBalance(1);
         var replenishmentPage = dashboardPage.secondCardReplenishment();
         replenishmentPage.doReplenishment(amountValue, DataHelper.getFirstCardInfo().getNumber());
-        var CurrentBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var CurrentBalanceSecondCard = dashboardPage.getCardBalance(1);
-        assertTrue(InitialBalanceFirstCard - CurrentBalanceFirstCard == amountValue);
-        assertTrue(CurrentBalanceSecondCard - InitialBalanceSecondCard == amountValue);
+        var currentBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var currentBalanceSecondCard = dashboardPage.getCardBalance(1);
+        assertTrue(initialBalanceFirstCard - currentBalanceFirstCard == amountValue);
+        assertTrue(currentBalanceSecondCard - initialBalanceSecondCard == amountValue);
 
 
     }
@@ -48,14 +47,14 @@ public class MoneyTransferTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        var InitialBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var InitialBalanceSecondCard = dashboardPage.getCardBalance(1);
+        var initialBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var initialBalanceSecondCard = dashboardPage.getCardBalance(1);
         var replenishmentPage = dashboardPage.firstCardReplenishment();
         replenishmentPage.doReplenishment(amountValue, DataHelper.getSecondCardInfo().getNumber());
-        var CurrentBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var CurrentBalanceSecondCard = dashboardPage.getCardBalance(1);
-        assertTrue(CurrentBalanceFirstCard - InitialBalanceFirstCard == amountValue);
-        assertTrue(InitialBalanceSecondCard - CurrentBalanceSecondCard == amountValue);
+        var currentBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var currentBalanceSecondCard = dashboardPage.getCardBalance(1);
+        assertTrue(currentBalanceFirstCard - initialBalanceFirstCard == amountValue);
+        assertTrue(initialBalanceSecondCard - currentBalanceSecondCard == amountValue);
     }
 
     @Test
@@ -66,15 +65,15 @@ public class MoneyTransferTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        var InitialBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var InitialBalanceSecondCard = dashboardPage.getCardBalance(1);
-        var amountValue = InitialBalanceFirstCard*2;
+        var initialBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var initialBalanceSecondCard = dashboardPage.getCardBalance(1);
+        var amountValue = initialBalanceFirstCard*2;
         var replenishmentPage = dashboardPage.secondCardReplenishment();
         replenishmentPage.doReplenishment(amountValue, DataHelper.getFirstCardInfo().getNumber());
-        var CurrentBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var CurrentBalanceSecondCard = dashboardPage.getCardBalance(1);
-        assertTrue(CurrentBalanceFirstCard == InitialBalanceFirstCard);
-        assertTrue(InitialBalanceSecondCard == CurrentBalanceSecondCard);
+        var currentBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var currentBalanceSecondCard = dashboardPage.getCardBalance(1);
+        assertTrue(currentBalanceFirstCard == initialBalanceFirstCard);
+        assertTrue(initialBalanceSecondCard == currentBalanceSecondCard);
 
     }
 
@@ -86,14 +85,14 @@ public class MoneyTransferTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        var InitialBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var InitialBalanceSecondCard = dashboardPage.getCardBalance(1);
-        var amountValue = InitialBalanceSecondCard*2;
+        var initialBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var initialBalanceSecondCard = dashboardPage.getCardBalance(1);
+        var amountValue = initialBalanceSecondCard*2;
         var replenishmentPage = dashboardPage.firstCardReplenishment();
         replenishmentPage.doReplenishment(amountValue, DataHelper.getSecondCardInfo().getNumber());
-        var CurrentBalanceFirstCard = dashboardPage.getCardBalance(0);
-        var CurrentBalanceSecondCard = dashboardPage.getCardBalance(1);
-        assertTrue(CurrentBalanceFirstCard == InitialBalanceFirstCard);
-        assertTrue(InitialBalanceSecondCard == CurrentBalanceSecondCard);
+        var currentBalanceFirstCard = dashboardPage.getCardBalance(0);
+        var currentBalanceSecondCard = dashboardPage.getCardBalance(1);
+        assertTrue(currentBalanceFirstCard == initialBalanceFirstCard);
+        assertTrue(initialBalanceSecondCard == currentBalanceSecondCard);
     }
 }
